@@ -27,7 +27,7 @@
         
         $sql = "SELECT `username` FROM `users` WHERE `user_id` = :id LIMIT 1";
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(':id', $id, PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
         
         try{
             $statement->execute();
@@ -35,7 +35,7 @@
             if($statement->rowCount() > 0){
                 return $user['username'];
             }
-            
+
             return "";
         }catch(PDOException $e){
             checkDebug() ? output($e->getMessage(), "error") : output("Kasutaja andmete leidmine ebaõnnestus. Palun võta ühendust administraatoriga!", "error");
