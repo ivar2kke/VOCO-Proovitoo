@@ -14,12 +14,13 @@
     }
 
     //Check if username exists in the database
-    $sql = "SELECT * FROM users WHERE username = :username";
+    $sql = "SELECT user_id FROM users WHERE username = :username LIMIT 1";
     $statement = $pdo->prepare($sql);
     $statement->bindParam(':username', $username, PDO::PARAM_STR);
 
     try{
         $statement->execute();
+        $user = $statement->fetch();
     }catch(PDOException $e){
         checkDebug() ? sendJSONResponse($e->getMessage(), "error") : sendJSONResponse("Sisselogimine ebaõnnestus! Palun võta ühendust lehekülje administraatoriga", "error");
     }
@@ -30,7 +31,7 @@
     }
 
     //If user exists, start the session
-    startUserSession($username);
+    startUserSession($user['user_id']);
     sendJSONResponse("", "success");
 
 ?>

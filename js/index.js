@@ -102,22 +102,27 @@ function setMessageFromHash(){
     var hash = window.location.hash
     if(hash && hash != "#"){
         var msg;
+        var type = "success";
         switch(hash){
             case "#logged-out": 
-                msg = "Sessioon edukalt lõpetatud!"
+                msg = "Sessioon edukalt lõpetatud!";
                 break;
             case "#logged-in": 
-                msg = "Oled edukalt sisse logitud!"
+                msg = "Oled edukalt sisse logitud!";
                 break;
             case "#registered":
-                msg = "Kasutaja edukalt registreeritud! Võid nüüd sisse logida!"
+                msg = "Kasutaja edukalt registreeritud! Võid nüüd sisse logida!";
+                break;
+            case "#not-logged-in":
+                msg = "Selle lehekülje nägemiseks pead eelnevalt sisse logima!";
+                type = "error"
                 break;
             default:
                 break;
         }
 
         if(msg){
-            setResponseMessage("<p>" + msg + "</p>", "success");
+            setResponseMessage("<p>" + msg + "</p>", type);
             showResponseMessage();
         }
 

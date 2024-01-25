@@ -2,7 +2,7 @@
   session_start();
 
   //If user session exists, redirect to main page
-  if(isset($_SESSION['username'])){
+  if(isset($_SESSION['user_id'])){
       header('Location: main.php');
   }
 
